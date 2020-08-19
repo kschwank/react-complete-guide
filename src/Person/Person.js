@@ -1,24 +1,22 @@
-import React, {Component} from "react";
+import React, { useState } from "react";
+import './Person.css'
 
-class Person extends Component {
+const Person = props => {
+    const [personState, setPersonState ] = useState({
+        showHobbies: false
+    });
 
-    state = {
-        showHobbies: true
+    const toggleShowHobbiesHandler = () => {
+        setPersonState({showHobbies: !personState.showHobbies});
     }
 
-    toggleShowHobbiesHandler = () => {
-        this.setState({showHobbies: !this.state.showHobbies});
-    }
-
-    render() {
-        return (
-            <div>
-                <p>I'm {this.props.name} and I am {this.props.age} years old.</p>
-                <button onClick={this.toggleShowHobbiesHandler}>Show Hobbies</button>
-                <p>{this.state.showHobbies ? this.props.children : null}</p>
-            </div>
-        )
-    }
+    return (
+        <div className={"Person"}>
+            <p>I'm {props.name} and I am {props.age} years old.</p>
+            <button onClick={toggleShowHobbiesHandler}>Show Hobbies</button>
+            <p>{personState.showHobbies ? props.children : null}</p>
+        </div>
+    )
 }
 
 export default Person;
